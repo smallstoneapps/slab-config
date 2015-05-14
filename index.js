@@ -2,6 +2,7 @@ var express = require('express');
 var superagent = require('superagent');
 
 var app = express();
+app.set('port', (process.env.PORT || 9990));
 
 var clientId = '4851112196.4902647071';
 var clientSecret = 'd77b041e0fc37e3993f70217a47f8e19';
@@ -22,7 +23,7 @@ app.get('/callback', function (req, res) {
   });
 });
 
-var server = app.listen(9990, function () {
+var server = app.listen(app.get('port'), function () {
   var host = server.address().address;
   var port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);
