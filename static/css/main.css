@@ -1,0 +1,10 @@
+.screenshot-footer {
+  height: 200px;
+  background-repeat: no-repeat;
+  position: fixed;
+  bottom: 0;
+  background-position: center top;
+  opacity: 0.3;
+  left: 0;
+  right: 0;
+}

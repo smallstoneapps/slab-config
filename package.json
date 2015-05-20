@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.12.3",
+    "express-jsx": "0.0.4",
+    "jade": "^1.9.2",
     "superagent": "^1.2.0"
   }
 }

@@ -1,0 +1,37 @@
+extends ../master
+
+block content
+  h1 Slab for Pebble
+  p.lead You are logged into the Slack team <strong>#{userInfo.team}</strong> as <strong>#{userInfo.username}</strong>.
+  a.btn.btn-block.btn-warning(href="/logout/")
+    i.fa.fa-slack.fa-fw
+    | LOGOUT FROM SLACK
+
+  hr
+
+  h2 Custom Replies
+  #custom-replies
+  //- table.table.js-table-replies
+    tbody
+      - each reply in customReplies
+        tr
+          td= reply.text
+          td(style="width: 10px;")
+            a.btn.btn-danger
+              i.fa.fa-remove
+      tr
+        td
+          input.form-control(type="text")
+        td
+          a.btn.btn-success
+            i.fa.fa-plus
+
+  a.btn.btn-block.btn-lg.btn-success(href="javascript: submit();") SAVE
+
+  #example
+
+block scripts
+  script.
+    var REPLIES = !{JSON.stringify(customReplies)};
+    var ACCESS_TOKEN = !{JSON.stringify(accessToken)};
+  script(src="/js/config/settings.js")
