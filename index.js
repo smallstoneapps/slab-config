@@ -78,6 +78,10 @@ app.get('/callback', function (req, res) {
   });
 });
 
+app.get('/logout', function (req, res) {
+  res.redirect('pebblejs://close#' + JSON.stringify({ accessToken: '' }));
+});
+
 app.post('/error', function (req, res) {
   var error = req.body || {};
   error.serverTime = new Date();
