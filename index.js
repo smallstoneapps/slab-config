@@ -77,7 +77,7 @@ app.get('/callback', function (req, res) {
 });
 
 app.post('/error', function (req, res) {
-  var error = res.body || {};
+  var error = req.body || {};
   error.serverTime = new Date();
   error.ip = req.ip;
   error.userAgent = req.headers['user-agent'];
