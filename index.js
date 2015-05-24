@@ -60,7 +60,7 @@ app.get('/config', function (req, res) {
     }
     else {
       res.render('config/login', {
-        loginUrl: 'https://slack.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUrl + '&state=STATE',
+        loginUrl: 'https://slack.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUrl + '&state=STATE&scope=identify,read,post,client',
         model: req.query.model
       });
     }
