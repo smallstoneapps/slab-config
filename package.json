@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.12.4",
+    "dotenv": "^1.1.0",
     "express": "^4.12.3",
     "express-jsx": "0.0.4",
     "jade": "^1.9.2",
+    "mongodb": "^2.0.33",
     "superagent": "^1.2.0"
   }
 }

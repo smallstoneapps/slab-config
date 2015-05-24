@@ -1,17 +1,24 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var superagent = require('superagent');
 var jsxCompile = require('express-jsx');
 var path = require('path');
+var MongoClient = require('mongodb').MongoClient
+var dotenv = require('dotenv');
+dotenv.load();
 
 var app = express();
 app.set('port', (process.env.PORT || 9990));
 app.set('view engine', 'jade');
 app.use(jsxCompile(path.join(__dirname, 'static')));
+app.use(bodyParser.json());
 app.use(express.static('static'));
 
-var clientId = '4851112196.4902647071';
-var clientSecret = 'd77b041e0fc37e3993f70217a47f8e19';
-var redirectUrl = 'https://slab-for-pebble.herokuapp.com/callback';
+var Errors;
+
+var clientId = process.env.SLACK_CLIENT_ID;
+var clientSecret = process.env.SLACK_CLIENT_SECRET;
+var redirectUrl = process.env.URL + 'config/';
 var defaultReplies = [
   { text: 'Yes' },
   { text: 'No' },
@@ -51,7 +58,7 @@ app.get('/config', function (req, res) {
     }
     else {
       res.render('config/login', {
-        loginUrl: 'https://slack.com/oauth/authorize?client_id=4851112196.4902647071&redirect_uri=' + redirectUrl + '&state=STATE',
+        loginUrl: 'https://slack.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUrl + '&state=STATE',
         model: req.query.model
       });
     }
@@ -67,6 +74,20 @@ app.get('/callback', function (req, res) {
   }).end(function (err, res) {
     res.redirect('pebblejs://close#' + res.body.access_token);
   });
+});
+
+app.post('/error', function (req, res) {
+  var error = res.body || {};
+  error.serverTime = new Date();
+  error.ip = req.ip;
+  error.userAgent = req.headers['user-agent'];
+  Errors.insert(error);
+  res.status(200);
+  res.send('ok');
+});
+
+MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
+  Errors = db.collection('errors');
 });
 
 var server = app.listen(app.get('port'), function () {
