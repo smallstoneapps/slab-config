@@ -86,7 +86,7 @@ app.post('/error', function (req, res) {
   res.send('ok');
 });
 
-MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
+MongoClient.connect(process.env.MONGOLAB_URI, function(err, db) {
   Errors = db.collection('errors');
 });
 
