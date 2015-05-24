@@ -26,7 +26,7 @@ var defaultReplies = [
 ];
 
 app.get('/', function (req, res) {
-  res.redirect('https://apps.getpebble.com/applications/');
+  res.redirect('https://apps.getpebble.com/applications/5561a6d9fd8f4b8de400004b');
 });
 
 app.get('/config', function (req, res) {
