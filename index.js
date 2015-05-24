@@ -74,7 +74,7 @@ app.get('/callback', function (req, res) {
     code: req.query.code,
     redirect_uri: redirectUrl
   }).end(function (err, resp) {
-    res.redirect('pebblejs://close#' + resp.body.access_token);
+    res.redirect('/config?slack_access_token=' + resp.body.access_token);
   });
 });
 
