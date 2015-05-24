@@ -31,17 +31,17 @@ app.get('/', function (req, res) {
 
 app.get('/config', function (req, res) {
   if (req.query.slack_access_token) {
-    superagent.get('https://slack.com/api/auth.test?token=' + req.query.slack_access_token).end(function (err, res) {
+    superagent.get('https://slack.com/api/auth.test?token=' + req.query.slack_access_token).end(function (err, resp) {
       if (err) {
         console.log(err);
         return renderConfigPage();
       }
-      if (! res.ok) {
+      if (! resp.ok) {
         console.log(res.error);
         return renderConfigPage();
       }
       var replies = defaultReplies;
-      renderConfigPage({ username: res.body.user, team: res.body.team, replies: replies });
+      renderConfigPage({ username: resp.body.user, team: resp.body.team, replies: replies });
     });
   }
   else {
@@ -71,8 +71,8 @@ app.get('/callback', function (req, res) {
     client_secret: clientSecret,
     code: req.query.code,
     redirect_uri: redirectUrl
-  }).end(function (err, res) {
-    res.redirect('pebblejs://close#' + res.body.access_token);
+  }).end(function (err, resp) {
+    res.redirect('pebblejs://close#' + resp.body.access_token);
   });
 });
 
