@@ -18,7 +18,7 @@ var Errors;
 
 var clientId = process.env.SLACK_CLIENT_ID;
 var clientSecret = process.env.SLACK_CLIENT_SECRET;
-var redirectUrl = process.env.URL + 'config/';
+var redirectUrl = process.env.URL + 'callback/';
 var defaultReplies = [
   { text: 'Yes' },
   { text: 'No' },
