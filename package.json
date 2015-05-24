@@ -16,6 +16,7 @@
     "express-jsx": "0.0.4",
     "jade": "^1.9.2",
     "mongodb": "^2.0.33",
+    "newrelic": "^1.19.2",
     "superagent": "^1.2.0"
   }
 }

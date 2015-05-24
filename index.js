@@ -1,11 +1,13 @@
+var dotenv = require('dotenv');
+dotenv.load();
+
+require('newrelic');
 var express = require('express');
 var bodyParser = require('body-parser');
 var superagent = require('superagent');
 var jsxCompile = require('express-jsx');
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient
-var dotenv = require('dotenv');
-dotenv.load();
 
 var app = express();
 app.set('port', (process.env.PORT || 9990));
