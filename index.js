@@ -43,6 +43,13 @@ app.get('/config', function (req, res) {
         return renderConfigPage();
       }
       var replies = defaultReplies;
+      if (req.query.replies) {
+        try {
+          replies = JSON.parse(req.query.replies);
+        }
+        catch (ex) {
+        }
+      }
       renderConfigPage({ username: resp.body.user, team: resp.body.team, replies: replies });
     });
   }
